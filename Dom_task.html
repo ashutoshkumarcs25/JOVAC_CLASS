@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <input type="number" id="ageInput" placeholder="Enter your age">
+    <button id="checkBtn">Check</button>
+
+    <script>
+        const age = document.getElementById("ageInput");
+        const btn = document.getElementById("checkBtn");
+
+        btn.addEventListener("click", function() {
+
+            if (age.value === "") {
+                alert("Please enter your age");
+            }
+            else if (age.value < 18) {
+                alert("You are not eligible");
+            }
+            else {
+                alert("You are eligible");
+            }
+
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto & Stock Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+   <nav class="navbar">
+    <h2>📈 MarketDash</h2>
+
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#crypto">Crypto</a>
+        <a href="#stocks">Stocks</a>
+        <a href="#chart">Chart</a>
+        <a href="#news">News</a>
+        <a href="#watchlist-section">Watchlist</a>
+        <a href="#converter">Converter</a>
+    </div>
+
+    <div class="nav-search">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="AAPL, TSLA..."
+        >
+        <button onclick="searchStock()">
+            Search
+        </button>
+        <div id="suggestions"></div>
+    </div>
+
+    <button id="themeBtn">🌙</button>
+    
+</nav>
+    <section class="hero-section">
+
+    <div class="hero-content">
+
+        <h1>📈 Welcome to MarketDash</h1>
+
+        <p>
+            Track Crypto, Stocks, Market Trends &
+            Financial News in Real Time
+        </p>
+
+           <button onclick="document.getElementById('crypto').scrollIntoView({behavior:'smooth'})">
+                Explore Markets
+        </button>
+
+    </div>
+
+</section>
+<section class="market-overview" id="home">
+        <div class="market-card">
+
+        <h2>📊 Market Status</h2>
+
+        <div class="market-grid">
+
+            <div class="market-item">
+                <span class="icon">₿</span>
+                <div>
+                    <h4>BTC Dominance</h4>
+                    <p id="btcDominance">Loading...</p>
+                </div>
+            </div>
+
+            <div class="market-item">
+                <span class="icon">🟢</span>
+                <div>
+                    <h4>Market Trend</h4>
+                    <p id="marketStatus">Loading...</p>
+                </div>
+            </div>
+
+            <div class="market-item">
+                <span class="icon">💰</span>
+                <div>
+                    <h4>Market Cap</h4>
+                    <p id="marketCap">Loading...</p>
+                </div>
+            </div>
+
+            <div class="market-item">
+                <span class="icon">📊</span>
+                <div>
+                    <h4>24h Volume</h4>
+                    <p id="marketVolume">Loading...</p>
+                </div>
+            </div>
+
+            <div class="market-item">
+                <span class="icon">🕒</span>
+                <div>
+                    <h4>Last Updated</h4>
+                    <p id="lastUpdated">Loading...</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="gainers-losers">
+
+    <div class="gainers">
+
+        <h2>🚀 Top Gainers</h2>
+
+        <ul>
+            <li>AAPL +4.2%</li>
+            <li>NVDA +3.8%</li>
+            <li>TSLA +3.1%</li>
+        </ul>
+
+    </div>
+
+    <div class="losers">
+
+        <h2>📉 Top Losers</h2>
+
+        <ul>
+            <li>META -2.4%</li>
+            <li>NFLX -1.8%</li>
+            <li>AMD -1.2%</li>
+        </ul>
+
+    </div>
+
+</section>
+    <!-- Crypto Cards -->
+<section class="crypto-container" id="crypto">
+   <div class="card">
+    <h3>₿ Bitcoin</h3>
+    <p id="btcPrice">Loading...</p>
+</div>
+
+<div class="card">
+    <h3>Ξ Ethereum</h3>
+    <p id="ethPrice">Loading...</p>
+</div>
+
+<div class="card">
+    <h3>◎ Solana</h3>
+    <p id="solPrice">Loading...</p>
+</div>
+
+<div class="card">
+    <h3>Ð Dogecoin</h3>
+    <p id="dogePrice">Loading...</p>
+</div>
+
+    </section>
+
+    <!-- Stock Info -->
+<section class="stock-section" id="stocks">
+
+    <h2>Stock Information</h2>
+
+    <div id="stockData">
+        Search any stock...
+    </div>
+
+</section>
+
+
+    <!-- Chart -->
+<section class="chart-section" id="chart">
+        <h2>Market Chart</h2>
+
+        <canvas id="marketChart"></canvas>
+
+    </section>
+
+    <!-- News -->
+<section class="news-section" id="news">
+            <h2>Latest Market News</h2>
+
+        <div id="newsContainer"></div>
+
+    </section>
+
+    <!-- Currency Converter -->
+<section class="converter-section" id="converter">
+    <h2>💱 Currency Converter</h2>
+
+    <div class="converter-box">
+
+        <input
+            type="number"
+            id="amount"
+            placeholder="Enter Amount"
+        >
+
+        <select id="fromCurrency">
+            <option value="USD">USD</option>
+            <option value="INR">INR</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+        </select>
+
+        <select id="toCurrency">
+            <option value="INR">INR</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+        </select>
+
+        <button onclick="convertCurrency()">
+            Convert
+        </button>
+
+        <div id="conversionResult"></div>
+
+    </div>
+
+</section>
+
+    <!-- Watchlist -->
+<section class="watchlist" id="watchlist-section">
+        <h2>⭐ Watchlist</h2>
+
+        <ul id="watchlist"></ul>
+        
+
+    </section>
+
+      <!-- for chat box  -->
+    <div id="chatBox">
+
+    <div class="chat-header">
+        MarketDash Assistant
+    </div>
+
+    <div id="chatMessages">
+
+        <div class="bot-msg">
+            👋 Hello! Ask me about stocks,
+            crypto or the market.
+        </div>
+
+    </div>
+
+    <div class="chat-input">
+
+        <input
+            type="text"
+            id="chatInput"
+            placeholder="Ask something..."
+        >
+
+        <button onclick="sendChat()">
+            Send
+        </button>
+
+    </div>
+
+</div>
+
+    
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Crypto & Stock Dashboard</p>
+    </footer>
+
+    <script src="js/crypto.js"></script>
+    <script src="js/stocks.js"></script>
+    <script src="js/news.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/watchlist.js"></script>
+    <script src="script.js"></script>
+    <script src="js/converter.js"></script>
+ 
+    
+</body>
+</html>
